@@ -6,7 +6,7 @@
 /*   By: nicolasgriveau <nicolasgriveau@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:11:57 by ngriveau          #+#    #+#             */
-/*   Updated: 2023/01/06 19:43:51 by nicolasgriv      ###   ########.fr       */
+/*   Updated: 2023/04/14 16:37:47 by nicolasgriv      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	ft_clean_mac(t_map *m)
 
 	y = 0;
 	x = 0;
-	while (y < m->winx)
+	while (y < m->winy)
 	{
-		while (x < m->winy)
+		while (x < m->winx)
 		{
 			ft_draw(m, x, y, 0);
 			x++;

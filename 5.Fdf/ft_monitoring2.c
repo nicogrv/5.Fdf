@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_monitoring2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngriveau <ngriveau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasgriveau <nicolasgriveau@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 02:18:38 by ngriveau          #+#    #+#             */
-/*   Updated: 2023/01/06 14:23:16 by ngriveau         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:20:46 by nicolasgriv      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
