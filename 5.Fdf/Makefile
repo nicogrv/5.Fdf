@@ -23,12 +23,10 @@ FLAGSMACOS = -lmlx -framework OpenGL -framework AppKit -MMD -I ./lib/minilibx_ma
 			${CC} -I. ${FLAGS} -MMD -c $< -o ${<:.c=.o}
 
 linux: 	${OBJSLINUX}
-		echo test
 		+${MAKE} -C ./lib/minilibx-linux/
 		${CC} -o ${LIB} ${OBJSLINUX} ${INCLUDE} ${FLAGSLINUX}
 
 macos: 	${OBJSMACOS}
-		echo oui
 		+${MAKE} -C ./lib/minilibx_macos/
 		${CC} -o ${LIB} ${OBJSMACOS} ${INCLUDE} ${FLAGSMACOS}
 

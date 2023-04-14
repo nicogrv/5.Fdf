@@ -6,7 +6,7 @@
 /*   By: nicolasgriveau <nicolasgriveau@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 18:44:51 by ngriveau          #+#    #+#             */
-/*   Updated: 2023/01/06 20:05:31 by nicolasgriv      ###   ########.fr       */
+/*   Updated: 2023/04/14 14:45:44 by nicolasgriv      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 //
 //	LINUX: 0		MacOS: 1	LINUX ECOLE: 2	MacBook Air 13.3: 3
 //
-# define OS 0
+# define OS 1
 //
 //	Resolution	
 //
@@ -113,7 +113,7 @@
 #  define ESC 53
 #  define TOUCH_C 8
 #  define TOUCH_X 7
-#  define TOUCH_M 46
+#  define TOUCH_M 4600
 #  define TOUCH_N 45
 #  define TOUCH_I 34
 #  define TOUCH_P 35
