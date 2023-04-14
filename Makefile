@@ -1,3 +1,5 @@
+SHELL = /bin/bash
+
 FILESMACOS += ft_animation.c
 FILESMACOS += ft_clean.c
 FILESMACOS += ft_isdigit.c
@@ -43,18 +45,12 @@ FILESLINUX += ft_map_calcul.c
 FILESLINUX += ft_start.c
 FILESLINUX += ft_only_linux.c
 
-# OBJSLINUX = ${FILESLINUX:.c=.o}
-# OBJSMACOS = ${FILESMACOS:.c=.o}
-
-
-
 NAME = Fdf
 CC = cc
 
 FLAGS = -Wall -Werror -Wextra -g
 FLAGSLINUX = -Wall -Werror -Wextra -lmlx -lm -lXext -MMD -lX11 -I ./lib/minilibx-linux -L ./lib/minilibx-linux -D OS=0
 FLAGSMACOS = -lmlx -framework OpenGL -framework AppKit -MMD -I ./lib/minilibx_macos -L ./lib/minilibx_macos -D OS=1
-
 
 
 OBJSLINUX = ${patsubst %.c, ${OBJS_PATH_LINUX}/%.o, ${FILESLINUX}}
@@ -64,7 +60,8 @@ OBJSMACOS = ${patsubst %.c, ${OBJS_PATH_MACOS}/%.o, ${FILESMACOS}}
 OBJS_PATH_MACOS = ./_Objet_macos
 
 all:	
-	@	echo "make linux / make macos"
+	@	echo "1.make asset"
+	@	echo "2.make linux / make macos"
 
 ${OBJSLINUX}: ${OBJS_PATH_LINUX}/%.o: %.c Makefile fdf.h
 	@	mkdir -p ${OBJS_PATH_LINUX}
@@ -80,14 +77,20 @@ ${OBJSMACOS}: ${OBJS_PATH_MACOS}/%.o: %.c Makefile fdf.h
 vpath %.c ./
 
 asset:
-		git clone git@github.com:nicogrv/5.5Fdf_Libs-Maps.git --depth 1
+	@	echo -ne "\r\033[2K" $(YELLOW) "\tDownload Lib/map..." "\033[0m"
+	@	git clone https://github.com/nicogrv/5.5Fdf_Libs-Maps.git --depth 1 --quiet
+	@	mv ./5.5Fdf_Libs-Maps/* . 
+	@	rm -rf 5.5Fdf_Libs-Maps
+	@	echo -ne "\r\033[2K" $(LIGHTGREEN) "\tDownload Lib/map OK" "\033[0m\n"
 
+assetclean:
+	@	rm -rf lib
+	@	rm -rf maps
 
 linux:  ${OBJSLINUX}
 	@	echo -ne "\r\033[2K" $(LIGHTGREEN) "\t$(NAME) OK" "\033[0m" "\n"
 	@	$(MAKE) --no-print-directory -s -C ./lib/minilibx-linux/
-		${CC} -o ${NAME} ${OBJSLINUX} ${INCLUDE} ${FLAGSLINUX}
-# @	echo -ne "\r\033[2K" $(LIGHTGREEN) "\t$(NAME) OK" "\033[0m" "\n"
+	@	${CC} -o ${NAME} ${OBJSLINUX} ${INCLUDE} ${FLAGSLINUX}
 
  	
 
@@ -95,100 +98,27 @@ macos: 	${OBJSMACOS}
 	@	echo -ne "\r\033[2K" $(LIGHTGREEN) "\t$(NAME) OK" "\033[0m" "\n"
 	@	echo -ne "\r\033[2K" $(YELLOW) "\tLib..." "\033[0m"
 	@	$(MAKE) --no-print-directory -s --silent --quiet -C lib/minilibx_macos
-# @	$(MAKE) --no-print-directory -s -C libft
 	@	echo -ne "\r\033[2K" $(LIGHTGREEN) "\tLIB OK" "\033[0m" "\n"
 	@	${CC} -o ${NAME} ${OBJSMACOS} ${INCLUDE} ${FLAGSMACOS}
+	@	echo -ne "\r\033[2K" $(LIGHTCYAN) "./Fdf ./map/{...}" "\033[0m" "\n"
 
 
 clean:	
 	@	echo -ne "\r\033[2K" $(YELLOW) "Cleaning\n\n"$(NC)
-	@	rm -f ${OBJSLINUX} ${DEPS} ${OBJSMACOS}
-	@	$(MAKE) --no-print-directory -s -C ./lib/minilibx_macos/ clean
+	@	rm -rf ${OBJS_PATH_MACOS}
+	@	rm -rf ${OBJS_PATH_LINUX}
+	@	$(MAKE) --no-print-directory -s -C ./lib/minilibx-linux/ clean
 	@	$(MAKE) --no-print-directory -s -C ./lib/minilibx_macos/ clean
 
 fclean:	clean;
+	@	rm -rf ${NAME}
 	@	echo -ne "\r\033[2K" $(GREEN) "\t$(NAME) Remove\n"$(NC)"\n"
-	@	rm -f ${NAME}
 
 -include ${DEPS}
 
 .PHONY: all clean fclean re
 
-
-# SHELL = /bin/bash
-
-# SRCS += ft_atoi.c
-# SRCS += ft_free.c
-# SRCS += ft_init.c
-# SRCS += ft_verifinput.c
-# SRCS += main.c
-# SRCS += philo.c
-# SRCS += print.c
-# SRCS += utiles.c
-
-
-# SRC_PATH += ./Philo_src/
-
-
-
-# OBJS = ${patsubst %.c, ${OBJS_PATH}/%.o, ${SRCS}}
-# OBJS_PATH = ./Philo_src/_Objet
-
-
-# HEAD_PATH += -I ./Philo_src/_Include
-
-
-# NAME = philo
-# CC = cc
-
-# CFLAGS += -Wall -Werror -Wextra
-# CFLAGS += -g
-
-
-
-# vpath %.c ${SRC_PATH}
-# vpath %.h ${HEAD_PATH}
-
-# all: ${NAME}
-
-# run: all
-# # @	clear
-# 	@	./${NAME}
-
-# valgrind: all
-# 	valgrind ./${NAME}
-
-
-# ${OBJS}: ${OBJS_PATH}/%.o: %.c Makefile philo.h
-# 	@	mkdir -p ${OBJS_PATH}
-# 	@	$(COLORCOMPIL)
-# 	@	${CC} ${CFLAGS} -c $< -o $@ ${HEAD_PATH}
-
-# ${NAME}:  ${OBJS}
-# 	@	${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIB} ${HEAD_PATH}
-# 	@	echo -ne "\r\033[2K" $(LIGHTGREEN) "\t$(NAME) OK" "\033[0m" "\n"
-
-
-# clean:
-# 	@	echo -ne "\r\033[2K" $(YELLOW) "Cleaning\n\n"$(NC)
-# 	@	rm -rf ${OBJS_PATH}
-
-
-# fclean: clean
-# 	@	rm -f ${NAME}
-# 	@	echo -ne "\r\033[2K" $(GREEN) "\t$(NAME) Remove\n"$(NC)"\n"
-
-
-
-
-# re: fclean
-# 	@	echo -ne "\r\033[2K" $(YELLOW) "Rebuilding..."$(NC)"\n""\n"
-# 	@	$(MAKE) -s
-
-
-# .PHONY: re clean fclean 
-
-NOCOLOR='\033[0m'
+NC='\033[0m'
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 ORANGE='\033[0;33m'

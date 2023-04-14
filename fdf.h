@@ -6,7 +6,7 @@
 /*   By: nicolasgriveau <nicolasgriveau@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 18:44:51 by ngriveau          #+#    #+#             */
-/*   Updated: 2023/04/14 15:21:00 by nicolasgriv      ###   ########.fr       */
+/*   Updated: 2023/04/14 18:42:08 by nicolasgriv      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,12 @@
 #  define ESC 53
 #  define TOUCH_C 8
 #  define TOUCH_X 7
-#  define TOUCH_M 4600
+#  define TOUCH_M 46
 #  define TOUCH_N 45
 #  define TOUCH_I 34
 #  define TOUCH_P 35
 #  define TOUCH_FOUR 21
-#  define TOUCH_FIVE 23
+#  define TOUCH_FIVE 230
 #  if OS == 3
 #   define WIDTH 1000
 #   define HEIGHT 1000
