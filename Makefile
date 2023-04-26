@@ -36,6 +36,7 @@ FILESLINUX += ft_itoa.c
 FILESLINUX += ft_line.c
 FILESLINUX += ft_map.c
 FILESLINUX += ft_monitoring.c
+FILESLINUX += ft_monitoring2.c
 FILESLINUX += get_next_line_utils.c
 FILESLINUX += ft_calloc.c
 FILESLINUX += ft_color_map.c
