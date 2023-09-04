@@ -51,7 +51,7 @@ CC = cc
 
 FLAGS = -Wall -Werror -Wextra -g
 FLAGSLINUX = -Wall -Werror -Wextra -lmlx -lm -lXext -MMD -lX11 -I ./lib/minilibx-linux -L ./lib/minilibx-linux -D OS=0
-FLAGSMACOS = -lmlx -framework OpenGL -framework AppKit -MMD -I ./lib/minilibx_macos -L ./lib/minilibx_macos -D OS=1
+FLAGSMACOS = -lmlx -framework OpenGL -framework AppKit -MMD -I ./lib/minilibx_macos -L ./lib/minilibx_macos 
 
 
 OBJSLINUX = ${patsubst %.c, ${OBJS_PATH_LINUX}/%.o, ${FILESLINUX}}
@@ -60,6 +60,8 @@ OBJS_PATH_LINUX = ./_Objet_linux
 OBJSMACOS = ${patsubst %.c, ${OBJS_PATH_MACOS}/%.o, ${FILESMACOS}}
 OBJS_PATH_MACOS = ./_Objet_macos
 
+vpath %.c ./
+
 all:	
 	@	echo "1.make asset"
 	@	echo "2.make linux / make macos"
@@ -67,15 +69,15 @@ all:
 ${OBJSLINUX}: ${OBJS_PATH_LINUX}/%.o: %.c Makefile fdf.h
 	@	mkdir -p ${OBJS_PATH_LINUX}
 	@	$(COLORCOMPILLINUX)
-	@	${CC} ${FLAGS} -c $< -o $@ 
+	@	${CC} -D OS=0 ${FLAGS} -c $< -o $@
+
 
 
 ${OBJSMACOS}: ${OBJS_PATH_MACOS}/%.o: %.c Makefile fdf.h
 	@	mkdir -p ${OBJS_PATH_MACOS}
 	@	$(COLORCOMPILMAC)
-	@	${CC} ${FLAGS} -c $< -o $@
+	@	${CC} -D OS=1 ${FLAGS} -c $< -o $@
 
-vpath %.c ./
 
 asset:
 	@	echo -ne "\r\033[2K" $(YELLOW) "\tDownload Lib/map..." "\033[0m"
@@ -89,27 +91,23 @@ assetclean:
 	@	rm -rf maps
 
 linux:  ${OBJSLINUX}
-	@	echo -ne "\r\033[2K" $(LIGHTGREEN) "\t$(NAME) OK" "\033[0m" "\n"
 	@	$(MAKE) --no-print-directory -s -C ./lib/minilibx-linux/
 	@	${CC} -o ${NAME} ${OBJSLINUX} ${INCLUDE} ${FLAGSLINUX}
-
+	@	echo -ne "\r\033[2K" $(LIGHTCYAN) "./Fdf ./map/{...}" "\033[0m" "\n"
  	
 
 macos: 	${OBJSMACOS}
-	@	echo -ne "\r\033[2K" $(LIGHTGREEN) "\t$(NAME) OK" "\033[0m" "\n"
-	@	echo -ne "\r\033[2K" $(YELLOW) "\tLib..." "\033[0m"
 	@	$(MAKE) --no-print-directory -s --silent --quiet -C lib/minilibx_macos
-	@	echo -ne "\r\033[2K" $(LIGHTGREEN) "\tLIB OK" "\033[0m" "\n"
-	@	${CC} -o ${NAME} ${OBJSMACOS} ${INCLUDE} ${FLAGSMACOS}
+	@	${CC} -o ${NAME} ${OBJSMACOS} ${INCLUDE} ${FLAGSMACOS} 
 	@	echo -ne "\r\033[2K" $(LIGHTCYAN) "./Fdf ./map/{...}" "\033[0m" "\n"
 
 
 clean:	
 	@	echo -ne "\r\033[2K" $(YELLOW) "Cleaning\n\n"$(NC)
-	@	rm -rf ${OBJS_PATH_MACOS}
-	@	rm -rf ${OBJS_PATH_LINUX}
 	@	$(MAKE) --no-print-directory -s -C ./lib/minilibx-linux/ clean
 	@	$(MAKE) --no-print-directory -s -C ./lib/minilibx_macos/ clean
+	@	rm -rf ${OBJS_PATH_MACOS}
+	@	rm -rf ${OBJS_PATH_LINUX}
 
 fclean:	clean;
 	@	rm -rf ${NAME}

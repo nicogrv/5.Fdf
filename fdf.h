@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngriveau <ngriveau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolasgriveau <nicolasgriveau@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 18:44:51 by ngriveau          #+#    #+#             */
-/*   Updated: 2023/04/26 18:43:21 by ngriveau         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:57:33 by nicolasgriv      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 //
 //	LINUX: 0		MacOS: 1	LINUX ECOLE: 2	MacBook Air 13.3: 3
 //
+#ifndef OS
 # define OS 2
+#endif
 //
 //	Resolution	
 //
@@ -44,27 +46,6 @@
 # define MAP7 "./maps/julia.fdf"
 # define MAP8 "./maps/france.fdf"
 # define MAP9 "./maps/worldmap.fdf"
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 # if OS == 0 || OS == 2
 #  define TOUCH_LEFTARROW 65361
